@@ -9,11 +9,11 @@ public class Field {
 
     protected static final String OCCUPIED = "O";
 
-    protected static final String MISSED = "x";
+    protected static final String MISSED = "+";
 
     protected static final String EMPTY = ".";
 
-    protected static final String HIT = "X";
+    protected static final String HIT = "#";
 
     @Getter
     private final boolean occupied;

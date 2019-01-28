@@ -34,22 +34,21 @@ public class Ship {
     public final void initialize(final Board board) {
         List<Position> occupied = new ArrayList<Position>();
         List<Position> zoned = new ArrayList<Position>();
-        int remaining = size;
-        while (remaining != 0) {
+        while (occupied.size() < size) {
             Optional<Position> position = Optional
                     .of(board.getRandomPosition(id, size));
-            while (remaining > 0 && position.isPresent()) {
+            while (occupied.size() < size && position.isPresent()) {
                 occupied.add(board.markOccupied(id, position.get()));
                 zoned.addAll(board.markZone(id, position.get()));
                 List<Position> next = board.getNext(id, position.get());
                 position = !next.isEmpty()
                         ? Optional.of(next.get(rand.nextInt(next.size())))
                         : Optional.empty();
-                remaining--;
             }
-            if (remaining != 0) {
+            if (occupied.size() < size) {
                 rollback(board, occupied, zoned);
-                remaining = size;
+                occupied.clear();
+                zoned.clear();
             }
         }
         this.occupied = occupied;

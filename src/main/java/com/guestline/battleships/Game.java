@@ -62,6 +62,7 @@ public class Game {
             System.out.println();
         }
         System.out.println("All enemy ships have sunk. Game Over.");
+        board.print();
     }
 
     public static void main(final String... args) {
