@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 import org.junit.Test;
 
 public class BoardTest {
-    
+
     @Test
     public void testIsEnoughSpace() {
         Board board = new Board();
@@ -26,12 +26,12 @@ public class BoardTest {
         assertTrue(board.isEnoughSpace(8, 6, 5));
         assertTrue(board.isEnoughSpace(6, 8, 5));
     }
-    
+
     @Test
     public void testHitOrMiss() {
         Board board = new Board();
         board.getFields()[0][0] = Field.builder().occupied(true).id(1).build();
-        
+
         Field hit = board.hitOrMiss(new Position(0, 0));
         Field miss = board.hitOrMiss(new Position(1, 1));
 
@@ -51,12 +51,12 @@ public class BoardTest {
                 board.getFields()[i][j] = Field.builder().occupied(true).build();
             });
         });
-        
+
         Position position = board.getRandomPosition(1, 5);
 
         assertThat(position.getRow(), equalTo(-1));
         assertThat(position.getColumn(), equalTo(-1));
-    }        
+    }
 
     @Test
     public void testGetRandomPositionAllZonedEnemy() {
@@ -66,12 +66,12 @@ public class BoardTest {
                 board.getFields()[i][j] = Field.builder().id(2).build();
             });
         });
-        
+
         Position position = board.getRandomPosition(1, 5);
 
         assertThat(position.getRow(), equalTo(-1));
         assertThat(position.getColumn(), equalTo(-1));
-    }        
+    }
 
     @Test
     public void testGetRandomPositionAllZonedAlly() {
@@ -81,12 +81,12 @@ public class BoardTest {
                 board.getFields()[i][j] = Field.builder().id(1).build();
             });
         });
-        
+
         Position position = board.getRandomPosition(1, 5);
 
         assertThat(position.getRow(), greaterThan(-1));
         assertThat(position.getColumn(), greaterThan(-1));
-    }        
+    }
 
     @Test
     public void testMarkZoned() {
@@ -96,7 +96,7 @@ public class BoardTest {
                 board.getFields()[i][j] = Field.builder().id(1).build();
             });
         });
-        
+
         List<Position> zoned1 = getZoned(board, 2, new Position(5, 0));
         List<Position> zoned2 = getZoned(board, 3, new Position(5, 4));
         List<Position> zoned3 = getZoned(board, 4, new Position(5, 2));
@@ -111,17 +111,17 @@ public class BoardTest {
 
     private List<Position> getZoned(Board board, int id, Position position) {
         board.getFields()[position.getRow()][position.getColumn()] = Field.builder().occupied(true).id(id).build();
-        return board.markZone(id, position);        
+        return board.markZone(id, position);
     }
 
     @Test
     public void testMarkOccupied() {
         Board board = new Board();
         board.markOccupied(1, new Position(0, 0));
-        
+
         assertThat(board.getFields()[0][0].isOccupied(), equalTo(true));
     }
-    
+
     @Test
     public void testGetNext() {
         Board board = new Board();
@@ -130,17 +130,17 @@ public class BoardTest {
                 board.getFields()[i][j] = Field.builder().id(1).build();
             });
         });
-        
+
         getZoned(board, 2, new Position(5, 0));
         getZoned(board, 3, new Position(5, 4));
         getZoned(board, 4, new Position(5, 2));
         getZoned(board, 5, new Position(8, 8));
         board.print(true);
-        
+
         List<Position> next = board.getNext(4, new Position(5, 2));
-        
+
         assertThat(next, hasSize(1));
         assertThat(next.get(0), equalTo(new Position(6, 2)));
-    }    
+    }
 
 }

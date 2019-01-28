@@ -9,32 +9,32 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 
 public class Game {
-    
+
     private final List<Ship> ships = new ArrayList<Ship>();
-    
+
     private final List<Ship> sunken = new ArrayList<Ship>();
-    
+
     @Getter
     private final Board board;
-    
+
     private final UserInput userInput;
-    
+
     public Game(Board board, UserInput userInput) {
         this.board = board;
         this.userInput = userInput;
     }
-    
+
     public void addShip(Ship ship) {
         ships.add(ship);
         ship.initialize(board);
     }
-    
+
     private boolean isGameOver() {
         return ships.stream().allMatch(s -> !s.isAfloat(board));
     }
-    
+
     public void play() {
-        while(!isGameOver()) {
+        while (!isGameOver()) {
             board.print();
             Optional<Position> position = userInput.nextMove();
             if (position.isPresent()) {
@@ -59,7 +59,7 @@ public class Game {
         }
         System.out.println("All enemy ships have sunk. Game Over.");
     }
-    
+
     public static void main(String... args) {
         Game game = new Game(new Board(), new UserInput(new Scanner(System.in)));
         game.addShip(new Ship(1, 5, "Battleship"));

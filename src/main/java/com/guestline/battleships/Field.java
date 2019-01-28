@@ -6,18 +6,18 @@ import lombok.Setter;
 
 @Builder
 public class Field {
-    
+
     protected static final String OCCUPIED = "O";
-    
+
     protected static final String MISSED = "x";
-    
+
     protected static final String EMPTY = ".";
-    
+
     protected static final String HIT = "X";
-    
+
     @Getter
     private final boolean occupied;
-    
+
     @Getter
     @Setter
     private boolean hit;
@@ -25,7 +25,7 @@ public class Field {
     @Getter
     @Setter
     private boolean missed;
-    
+
     @Getter
     private int id;
 
@@ -35,11 +35,11 @@ public class Field {
         this.hit = hit;
         this.id = id;
     }
-    
+
     public String toString() {
         return toString(false);
     }
-    
+
     public String toString(boolean debug) {
         if (occupied) {
             if (hit) {
@@ -58,10 +58,10 @@ public class Field {
                 if (debug) {
                     if (id != 0) {
                         return String.valueOf(id);
-                    }                
+                    }
                 } else {
                     return EMPTY;
-                }                
+                }
             }
         }
         return EMPTY;
