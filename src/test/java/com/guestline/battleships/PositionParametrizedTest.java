@@ -3,6 +3,7 @@ package com.guestline.battleships;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -32,7 +33,7 @@ public class PositionParametrizedTest {
     }
 
     @Test
-    public void test() {
+    public void test() throws UnsupportedEncodingException {
         assertThat(fInput, equalTo(fExpected.toOrdinalString()));
     }
 

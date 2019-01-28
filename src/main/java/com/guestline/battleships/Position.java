@@ -1,5 +1,7 @@
 package com.guestline.battleships;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,8 +26,8 @@ public class Position {
         row = Integer.parseInt(input.substring(1)) - 1;
     }
 
-    public final String toOrdinalString() {
-        return new String(new byte[] {(byte) (column + 97) }) + (row + 1);
+    public final String toOrdinalString() throws UnsupportedEncodingException {
+        return new String(new byte[] {(byte) (column + 97) }, StandardCharsets.UTF_8.name()) + (row + 1);
     }
 
     public final List<Position> getNeighbours() {

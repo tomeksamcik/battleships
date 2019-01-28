@@ -4,6 +4,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 
 import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -28,8 +29,12 @@ public class GameTest {
         StringBuilder sb = new StringBuilder();
         IntStream.range(0, Board.ROWS).forEach(i -> {
             IntStream.range(0, Board.COLUMNS).forEach(j -> {
-                sb.append(new Position(i, j).toOrdinalString());
-                sb.append(" ");
+                try {
+                    sb.append(new Position(i, j).toOrdinalString());
+                    sb.append(" ");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             });
         });
         return sb.toString();

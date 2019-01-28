@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 
 public class Board {
@@ -17,7 +18,7 @@ public class Board {
 
     private static final int GET_POSITION_ATTEMPTS_THRESHOLD = 10;
 
-    @Getter
+    @Getter(AccessLevel.PROTECTED)
     private Field[][] fields = new Field[ROWS][COLUMNS];
 
     public Board() {

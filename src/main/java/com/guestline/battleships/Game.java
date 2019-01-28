@@ -1,5 +1,7 @@
 package com.guestline.battleships;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,7 +67,7 @@ public class Game {
 
     public static void main(final String... args) {
         Game game = new Game(new Board(),
-                new UserInput(new Scanner(System.in)));
+                new UserInput(new Scanner(System.in, StandardCharsets.UTF_8.name())));
         game.addShip(new Ship(1, 5, "Battleship"));
         game.addShip(new Ship(2, 4, "Destroyer"));
         game.addShip(new Ship(3, 4, "Destroyer"));
