@@ -29,7 +29,7 @@ public class Game {
         ship.initialize(board);
     }
 
-    private boolean isGameOver() {
+    public final boolean isGameOver() {
         return ships.stream().allMatch(s -> !s.isAfloat(board));
     }
 
