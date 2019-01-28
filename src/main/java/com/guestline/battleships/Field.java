@@ -45,7 +45,11 @@ public class Field {
             if (hit) {
                 return HIT;
             } else {
-                return OCCUPIED;
+                if (debug) {
+                    return OCCUPIED;
+                } else {
+                    return EMPTY;
+                }
             }
         } else {
             if (missed) {
