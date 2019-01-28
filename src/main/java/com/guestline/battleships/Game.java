@@ -19,12 +19,12 @@ public class Game {
 
     private final UserInput userInput;
 
-    public Game(Board board, UserInput userInput) {
+    public Game(final Board board, final UserInput userInput) {
         this.board = board;
         this.userInput = userInput;
     }
 
-    public void addShip(Ship ship) {
+    public final void addShip(final Ship ship) {
         ships.add(ship);
         ship.initialize(board);
     }
@@ -33,7 +33,7 @@ public class Game {
         return ships.stream().allMatch(s -> !s.isAfloat(board));
     }
 
-    public void play() {
+    public final void play() {
         while (!isGameOver()) {
             board.print();
             Optional<Position> position = userInput.nextMove();
@@ -41,10 +41,13 @@ public class Game {
                 Field target = board.hitOrMiss(position.get());
                 if (target.isHit()) {
                     System.out.println("You hit an enemy ship !");
-                    List<Ship> notAfloat = ships.stream().filter(s -> !s.isAfloat(board)).collect(Collectors.toList());
+                    List<Ship> notAfloat = ships.stream()
+                            .filter(s -> !s.isAfloat(board))
+                            .collect(Collectors.toList());
                     notAfloat.forEach(s -> {
                         if (!sunken.contains(s)) {
-                            System.out.println(String.format("Enemy %s has sunk !", s.getName()));
+                            System.out.println(String.format(
+                                    "Enemy %s has sunk !", s.getName()));
                         }
                         sunken.add(s);
                     });
@@ -60,8 +63,9 @@ public class Game {
         System.out.println("All enemy ships have sunk. Game Over.");
     }
 
-    public static void main(String... args) {
-        Game game = new Game(new Board(), new UserInput(new Scanner(System.in)));
+    public static void main(final String... args) {
+        Game game = new Game(new Board(),
+                new UserInput(new Scanner(System.in)));
         game.addShip(new Ship(1, 5, "Battleship"));
         game.addShip(new Ship(2, 4, "Destroyer"));
         game.addShip(new Ship(3, 4, "Destroyer"));

@@ -29,18 +29,19 @@ public class Field {
     @Getter
     private int id;
 
-    public Field(boolean occupied, boolean hit, boolean missed, int id) {
+    public Field(final boolean occupied, final boolean hit,
+            final boolean missed, final int id) {
         this.occupied = occupied;
         this.missed = missed;
         this.hit = hit;
         this.id = id;
     }
 
-    public String toString() {
+    public final String toString() {
         return toString(false);
     }
 
-    public String toString(boolean debug) {
+    public final String toString(final boolean debug) {
         if (occupied) {
             if (hit) {
                 return HIT;

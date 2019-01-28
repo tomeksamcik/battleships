@@ -15,6 +15,8 @@ public class Board {
 
     public static final int COLUMNS = 10;
 
+    private static final int GET_POSITION_ATTEMPTS_THRESHOLD = 10;
+
     @Getter
     private Field[][] fields = new Field[ROWS][COLUMNS];
 
@@ -30,16 +32,17 @@ public class Board {
         });
     }
 
-    public void print() {
+    public final void print() {
         print(false);
     }
 
-    public void print(boolean debug) {
+    public final void print(final boolean debug) {
         StringBuilder sb = new StringBuilder();
         IntStream.range(-1, fields.length).forEach(i -> {
             if (i == -1) {
                 sb.append("  ");
-                IntStream.range(0, fields.length).forEach(j -> sb.append((char) (j + 97) + " "));
+                IntStream.range(0, fields.length)
+                        .forEach(j -> sb.append((char) (j + 97) + " "));
             } else {
                 sb.append((i + 1) + (i != 9 ? " " : ""));
                 IntStream.range(0, fields[i].length).forEach(j -> {
@@ -51,43 +54,51 @@ public class Board {
         System.out.println(sb);
     }
 
-    public List<Position> getNext(int id, Position position) {
-        return position.getImmediateNeighbours().stream().filter(p -> isValid(id, p))
-                .filter(p -> p.getRow() >= position.getRow()).filter(p -> p.getColumn() >= position.getColumn())
+    public final List<Position> getNext(final int id, final Position position) {
+        return position.getImmediateNeighbours().stream()
+                .filter(p -> isValid(id, p))
+                .filter(p -> p.getRow() >= position.getRow())
+                .filter(p -> p.getColumn() >= position.getColumn())
                 .collect(Collectors.toList());
     }
 
-    public Position markOccupied(int id, Position position) {
-        fields[position.getRow()][position.getColumn()] = Field.builder().occupied(true).id(id).build();
+    public final Position markOccupied(final int id, final Position position) {
+        fields[position.getRow()][position.getColumn()] = Field.builder()
+                .occupied(true).id(id).build();
         return position;
     }
 
-    public List<Position> markZone(int id, Position position) {
+    public final List<Position> markZone(final int id,
+            final Position position) {
         List<Position> zoned = position.getNeighbours().stream()
                 .filter(p -> !fields[p.getRow()][p.getColumn()].isOccupied())
-                .filter(p -> fields[p.getRow()][p.getColumn()].getId() == 0).collect(Collectors.toList());
-        zoned.forEach(p -> fields[p.getRow()][p.getColumn()] = Field.builder().id(id).build());
+                .filter(p -> fields[p.getRow()][p.getColumn()].getId() == 0)
+                .collect(Collectors.toList());
+        zoned.forEach(p -> fields[p.getRow()][p.getColumn()] = Field.builder()
+                .id(id).build());
         return zoned;
     }
 
-    public Position getRandomPosition(int id, int size) {
+    public final Position getRandomPosition(final int id, final int size) {
         int row, column = -1;
         int attempts = 0;
         do {
             row = rand.nextInt(ROWS);
             column = rand.nextInt(COLUMNS);
-            if (++attempts >= 10) {
+            if (++attempts >= GET_POSITION_ATTEMPTS_THRESHOLD) {
                 return new Position(-1, -1);
             }
-        } while (!isEnoughSpace(row, column, size) || !isValid(id, new Position(row, column)));
+        } while (!isEnoughSpace(row, column, size)
+                || !isValid(id, new Position(row, column)));
         return new Position(row, column);
     }
 
-    public boolean isEnoughSpace(int row, int column, int size) {
+    public final boolean isEnoughSpace(final int row, final int column,
+            final int size) {
         return ROWS - 1 - row + COLUMNS - 1 - column >= size - 1;
     }
 
-    public Field hitOrMiss(Position position) {
+    public final Field hitOrMiss(final Position position) {
         Field target = fields[position.getRow()][position.getColumn()];
         if (target.isOccupied()) {
             target.setHit(true);
@@ -97,9 +108,10 @@ public class Board {
         return target;
     }
 
-    private boolean isValid(int id, Position p) {
+    private boolean isValid(final int id, final Position p) {
         return !fields[p.getRow()][p.getColumn()].isOccupied()
-                && (fields[p.getRow()][p.getColumn()].getId() == 0 || fields[p.getRow()][p.getColumn()].getId() == id);
+                && (fields[p.getRow()][p.getColumn()].getId() == 0
+                        || fields[p.getRow()][p.getColumn()].getId() == id);
     }
 
 }

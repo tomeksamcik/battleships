@@ -8,23 +8,25 @@ public class UserInput {
 
     private final Scanner in;
 
-    private final static Pattern PATTERN = Pattern.compile("[a-jA-J](?:[0-9]{1}|10)");
+    private static final Pattern PATTERN = Pattern
+            .compile("[a-jA-J](?:[0-9]{1}|10)");
 
-    private final static String INPUT_ERROR = "Incorrect Input !";
+    private static final String INPUT_ERROR = "Incorrect Input !";
 
-    private final static String INPUT_PROMPT = "Please enter your move (ex. a7): ";
+    private static final String INPUT_PROMPT = "Please enter your move (ex. a7): ";
 
-    public UserInput(Scanner in) {
+    public UserInput(final Scanner in) {
         this.in = in;
     }
 
-    public Optional<Position> nextMove() {
+    public final Optional<Position> nextMove() {
         System.out.print(INPUT_PROMPT);
 
         while (!in.hasNext(PATTERN)) {
             if (in.hasNext()) {
                 in.next();
-                System.out.println(INPUT_ERROR + System.lineSeparator() + INPUT_PROMPT);
+                System.out.println(
+                        INPUT_ERROR + System.lineSeparator() + INPUT_PROMPT);
             } else {
                 return Optional.empty();
             }

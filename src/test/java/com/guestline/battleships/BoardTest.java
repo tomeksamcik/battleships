@@ -48,7 +48,8 @@ public class BoardTest {
         Board board = new Board();
         IntStream.range(0, 10).forEach(i -> {
             IntStream.range(0, 10).forEach(j -> {
-                board.getFields()[i][j] = Field.builder().occupied(true).build();
+                board.getFields()[i][j] = Field.builder().occupied(true)
+                        .build();
             });
         });
 
@@ -110,7 +111,8 @@ public class BoardTest {
     }
 
     private List<Position> getZoned(Board board, int id, Position position) {
-        board.getFields()[position.getRow()][position.getColumn()] = Field.builder().occupied(true).id(id).build();
+        board.getFields()[position.getRow()][position.getColumn()] = Field
+                .builder().occupied(true).id(id).build();
         return board.markZone(id, position);
     }
 
