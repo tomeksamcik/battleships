@@ -35,8 +35,7 @@ public class Ship {
         List<Position> occupied = new ArrayList<Position>();
         List<Position> zoned = new ArrayList<Position>();
         while (occupied.size() < size) {
-            Optional<Position> position = Optional
-                    .of(board.getRandomPosition(id, size));
+            Optional<Position> position = board.getRandomPosition(id, size);
             while (occupied.size() < size && position.isPresent()) {
                 occupied.add(board.markOccupied(id, position.get()));
                 zoned.addAll(board.markZone(id, position.get()));

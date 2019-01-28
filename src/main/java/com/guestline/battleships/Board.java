@@ -1,6 +1,7 @@
 package com.guestline.battleships;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -80,18 +81,18 @@ public class Board {
         return zoned;
     }
 
-    public final Position getRandomPosition(final int id, final int size) {
+    public final Optional<Position> getRandomPosition(final int id, final int size) {
         int row, column = -1;
         int attempts = 0;
         do {
             row = rand.nextInt(ROWS);
             column = rand.nextInt(COLUMNS);
             if (++attempts >= GET_POSITION_ATTEMPTS_THRESHOLD) {
-                return new Position(-1, -1);
+                return Optional.empty();
             }
         } while (!isEnoughSpace(row, column, size)
                 || !isValid(id, new Position(row, column)));
-        return new Position(row, column);
+        return Optional.of(new Position(row, column));
     }
 
     public final boolean isEnoughSpace(final int row, final int column,

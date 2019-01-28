@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -53,10 +54,9 @@ public class BoardTest {
             });
         });
 
-        Position position = board.getRandomPosition(1, 5);
+        Optional<Position> position = board.getRandomPosition(1, 5);
 
-        assertThat(position.getRow(), equalTo(-1));
-        assertThat(position.getColumn(), equalTo(-1));
+        assertThat(position.isPresent(), equalTo(false));
     }
 
     @Test
@@ -68,10 +68,9 @@ public class BoardTest {
             });
         });
 
-        Position position = board.getRandomPosition(1, 5);
+        Optional<Position> position = board.getRandomPosition(1, 5);
 
-        assertThat(position.getRow(), equalTo(-1));
-        assertThat(position.getColumn(), equalTo(-1));
+        assertThat(position.isPresent(), equalTo(false));
     }
 
     @Test
@@ -83,10 +82,9 @@ public class BoardTest {
             });
         });
 
-        Position position = board.getRandomPosition(1, 5);
+        Optional<Position> position = board.getRandomPosition(1, 5);
 
-        assertThat(position.getRow(), greaterThan(-1));
-        assertThat(position.getColumn(), greaterThan(-1));
+        assertThat(position.isPresent(), equalTo(true));
     }
 
     @Test
