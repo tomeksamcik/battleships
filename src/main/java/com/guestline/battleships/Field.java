@@ -45,11 +45,11 @@ public final class Field {
         this.id = id;
     }
 
-    public final String toString() {
+    public String toString() {
         return toString(false);
     }
 
-    public final String toString(final boolean debug) {
+    public String toString(final boolean debug) {
         return occupied ? (hit ? HIT : (debug ? OCCUPIED : EMPTY))
                 : (missed ? MISSED
                         : (sunk ? SUNK
