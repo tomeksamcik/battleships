@@ -72,18 +72,17 @@ public class Board {
 
     public final List<Position> markZone(final int id,
             final Position position) {
-        List<Position> zoned = position.getNeighbours().stream()
+        List<Position> zone = position.getNeighbours().stream()
                 .filter(p -> !fields[p.getRow()][p.getColumn()].isOccupied())
                 .filter(p -> fields[p.getRow()][p.getColumn()].getId() == 0)
                 .collect(Collectors.toList());
-        zoned.forEach(p -> fields[p.getRow()][p.getColumn()] = Field.builder()
+        zone.forEach(p -> fields[p.getRow()][p.getColumn()] = Field.builder()
                 .id(id).build());
-        return zoned;
+        return zone;
     }
 
     public final Optional<Position> getRandomPosition(final int id, final int size) {
-        int row, column = -1;
-        int attempts = 0;
+        int row, column, attempts = 0;
         do {
             row = rand.nextInt(ROWS);
             column = rand.nextInt(COLUMNS);

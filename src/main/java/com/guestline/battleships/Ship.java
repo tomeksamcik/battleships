@@ -33,21 +33,21 @@ public class Ship {
 
     public final void initialize(final Board board) {
         List<Position> occupied = new ArrayList<Position>();
-        List<Position> zoned = new ArrayList<Position>();
+        List<Position> zone = new ArrayList<Position>();
         while (occupied.size() < size) {
             Optional<Position> position = board.getRandomPosition(id, size);
             while (occupied.size() < size && position.isPresent()) {
                 occupied.add(board.markOccupied(id, position.get()));
-                zoned.addAll(board.markZone(id, position.get()));
+                zone.addAll(board.markZone(id, position.get()));
                 List<Position> next = board.getNext(id, position.get());
                 position = !next.isEmpty()
                         ? Optional.of(next.get(rand.nextInt(next.size())))
                         : Optional.empty();
             }
             if (occupied.size() < size) {
-                rollback(board, occupied, zoned);
+                rollback(board, occupied, zone);
                 occupied.clear();
-                zoned.clear();
+                zone.clear();
             }
         }
         this.occupied = occupied;

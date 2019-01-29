@@ -2,7 +2,6 @@ package com.guestline.battleships;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.number.OrderingComparison.greaterThan;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -96,19 +95,19 @@ public class BoardTest {
             });
         });
 
-        List<Position> zoned1 = getZoned(board, 2, new Position(5, 0));
-        List<Position> zoned2 = getZoned(board, 3, new Position(5, 4));
-        List<Position> zoned3 = getZoned(board, 4, new Position(5, 2));
-        List<Position> zoned4 = getZoned(board, 5, new Position(8, 8));
+        List<Position> zone1 = getZone(board, 2, new Position(5, 0));
+        List<Position> zone2 = getZone(board, 3, new Position(5, 4));
+        List<Position> zone3 = getZone(board, 4, new Position(5, 2));
+        List<Position> zone4 = getZone(board, 5, new Position(8, 8));
         board.print(true);
 
-        assertThat(zoned1, hasSize(3));
-        assertThat(zoned2, hasSize(5));
-        assertThat(zoned3, hasSize(1));
-        assertThat(zoned4, hasSize(8));
+        assertThat(zone1, hasSize(3));
+        assertThat(zone2, hasSize(5));
+        assertThat(zone3, hasSize(1));
+        assertThat(zone4, hasSize(8));
     }
 
-    private List<Position> getZoned(Board board, int id, Position position) {
+    private List<Position> getZone(Board board, int id, Position position) {
         board.getFields()[position.getRow()][position.getColumn()] = Field
                 .builder().occupied(true).id(id).build();
         return board.markZone(id, position);
@@ -131,10 +130,10 @@ public class BoardTest {
             });
         });
 
-        getZoned(board, 2, new Position(5, 0));
-        getZoned(board, 3, new Position(5, 4));
-        getZoned(board, 4, new Position(5, 2));
-        getZoned(board, 5, new Position(8, 8));
+        getZone(board, 2, new Position(5, 0));
+        getZone(board, 3, new Position(5, 4));
+        getZone(board, 4, new Position(5, 2));
+        getZone(board, 5, new Position(8, 8));
         board.print(true);
 
         List<Position> next = board.getNext(4, new Position(5, 2));

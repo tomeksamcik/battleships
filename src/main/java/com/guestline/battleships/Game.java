@@ -52,8 +52,7 @@ public class Game {
                         }
                         sunken.add(s);
                     });
-                }
-                if (target.isMissed()) {
+                } else if (target.isMissed()) {
                     System.out.println("You missed :(");
                 }
             } else {
