@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 import lombok.Getter;
 
 public class Game {
 
     private final List<Ship> ships = new ArrayList<Ship>();
-
-    private final List<Ship> sunken = new ArrayList<Ship>();
 
     @Getter
     private final Board board;
@@ -36,22 +33,15 @@ public class Game {
 
     public final void play() {
         while (!isGameOver()) {
-            board.print();
+            board.print(true);
             Optional<Position> position = userInput.nextMove();
             if (position.isPresent()) {
                 Field target = board.hitOrMiss(position.get());
                 if (target.isHit()) {
                     System.out.println("You hit an enemy ship !");
-                    List<Ship> notAfloat = ships.stream()
-                            .filter(s -> !s.isAfloat(board))
-                            .collect(Collectors.toList());
-                    notAfloat.forEach(s -> {
-                        if (!sunken.contains(s)) {
-                            System.out.println(String.format(
-                                    "Enemy %s has sunk !", s.getName()));
-                        }
-                        sunken.add(s);
-                    });
+                    ships.stream().filter(s -> s.isSinking(board))
+                            .forEach(s -> System.out.println(String.format(
+                                    "Enemy %s is sinking !", s.getName())));
                 } else if (target.isMissed()) {
                     System.out.println("You missed :(");
                 }
@@ -60,7 +50,7 @@ public class Game {
             }
             System.out.println();
         }
-        System.out.println("All enemy ships have sunk. Game Over.");
+        System.out.println("All enemy ships have sunk. Game Over.\n");
         board.print();
     }
 

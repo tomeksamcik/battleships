@@ -19,6 +19,8 @@ public class Ship {
 
     @Getter
     private final String name;
+    
+    private boolean hasSunk;
 
     private final Random rand = new Random();
 
@@ -51,6 +53,19 @@ public class Ship {
             }
         }
         this.occupied = occupied;
+    }
+    
+    public final boolean isSinking(final Board board) {
+       boolean isSinking = hasSunk != !isAfloat(board);
+       hasSunk = !isAfloat(board);
+       if (isSinking) {
+           occupied.forEach(o -> {
+               board.getFields()[o.getRow()][o.getColumn()].setOccupied(false);
+               board.getFields()[o.getRow()][o.getColumn()].setHit(false);
+               board.getFields()[o.getRow()][o.getColumn()].setSunk(true);
+           });
+       }
+       return isSinking;
     }
 
     public final boolean isAfloat(final Board board) {
