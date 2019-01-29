@@ -36,7 +36,7 @@ public class Field {
     @Getter
     private int id;
 
-    public Field(final boolean occupied, final boolean hit,
+    private Field(final boolean occupied, final boolean hit,
             final boolean missed, final boolean sunk, final int id) {
         this.occupied = occupied;
         this.missed = missed;

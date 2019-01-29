@@ -21,7 +21,7 @@ public class Position {
     @Getter
     private int column;
 
-    public Position(final String input) {
+    Position(final String input) {
         column = input.charAt(0) - 97;
         row = Integer.parseInt(input.substring(1)) - 1;
     }

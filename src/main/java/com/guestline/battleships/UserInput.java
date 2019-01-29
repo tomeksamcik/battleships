@@ -15,7 +15,7 @@ public class UserInput {
 
     private static final String INPUT_PROMPT = "Please enter your move (ex. a7): ";
 
-    public UserInput(final Scanner in) {
+    UserInput(final Scanner in) {
         this.in = in;
     }
 

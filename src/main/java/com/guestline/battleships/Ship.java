@@ -27,7 +27,7 @@ public class Ship {
     @Getter
     private List<Position> occupied = new ArrayList<Position>();
 
-    public Ship(final int id, final int size, final String name) {
+    Ship(final int id, final int size, final String name) {
         this.id = id;
         this.size = size;
         this.name = name;

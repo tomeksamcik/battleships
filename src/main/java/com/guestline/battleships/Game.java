@@ -17,7 +17,7 @@ public class Game {
 
     private final UserInput userInput;
 
-    public Game(final Board board, final UserInput userInput) {
+    private Game(final Board board, final UserInput userInput) {
         this.board = board;
         this.userInput = userInput;
     }

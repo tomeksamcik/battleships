@@ -22,7 +22,7 @@ public class Board {
     @Getter(AccessLevel.PROTECTED)
     private Field[][] fields = new Field[ROWS][COLUMNS];
 
-    public Board() {
+    Board() {
         initialize();
     }
 
