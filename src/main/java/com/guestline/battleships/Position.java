@@ -22,7 +22,7 @@ public class Position {
     private int column;
 
     Position(final String input) {
-        column = input.charAt(0) - 97;
+        column = input.charAt(0) - Board.ASCII_A;
         row = Integer.parseInt(input.substring(1)) - 1;
     }
 
