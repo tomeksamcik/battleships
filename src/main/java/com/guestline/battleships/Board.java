@@ -17,7 +17,7 @@ public class Board {
 
     public static final int COLUMNS = 10;
 
-    private static final int ASCII_A = 97;
+    public static final int ASCII_A = 97;
 
     private static final int GET_POSITION_ATTEMPTS_THRESHOLD = 10;
 

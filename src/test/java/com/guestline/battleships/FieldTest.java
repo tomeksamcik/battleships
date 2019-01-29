@@ -27,6 +27,9 @@ public class FieldTest {
                 { Field.HIT,
                         Field.builder().occupied(true).hit(true).id(1)
                                 .build() },
+                { Field.HIT, Field.builder().sunk(true).id(1).build() },
+                { Field.MISSED,
+                        Field.builder().sunk(true).missed(true).id(1).build() },
                 { "1", Field.builder().id(1).build() },
                 { Field.MISSED, Field.builder().missed(true).id(1).build() },
                 { Field.EMPTY, Field.builder().build() }, });
@@ -39,6 +42,7 @@ public class FieldTest {
 
     @Test
     public void test() {
+        System.out.println(fInput + " == " + fExpected.toString(true) + " hit: " + fExpected.isHit() + ", missed: " + fExpected.isMissed() + ", occupied: " + fExpected.isOccupied() + ", sunk: " + fExpected.isSunk());
         assertThat(fInput, equalTo(fExpected.toString(true)));
     }
 

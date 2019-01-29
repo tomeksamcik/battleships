@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Builder
-public class Field {
+public final class Field {
 
     protected static final String OCCUPIED = "O";
 
@@ -36,8 +36,8 @@ public class Field {
     @Getter
     private int id;
 
-    private Field(final boolean occupied, final boolean hit,
-            final boolean missed, final boolean sunk, final int id) {
+    private Field(final boolean occupied, final boolean missed,
+            final boolean sunk, final boolean hit, final int id) {
         this.occupied = occupied;
         this.missed = missed;
         this.sunk = sunk;

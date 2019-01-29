@@ -19,7 +19,7 @@ public class Ship {
 
     @Getter
     private final String name;
-    
+
     private boolean hasSunk;
 
     private final Random rand = new Random();
@@ -54,23 +54,25 @@ public class Ship {
         }
         this.occupied = occupied;
     }
-    
+
     public final boolean isSinking(final Board board) {
-       boolean isSinking = hasSunk != !isAfloat(board);
-       hasSunk = !isAfloat(board);
-       if (isSinking) {
-           occupied.forEach(o -> {
-               board.getFields()[o.getRow()][o.getColumn()].setOccupied(false);
-               board.getFields()[o.getRow()][o.getColumn()].setHit(false);
-               board.getFields()[o.getRow()][o.getColumn()].setSunk(true);
-           });
-       }
-       return isSinking;
+        boolean isSinking = hasSunk != !isAfloat(board);
+        hasSunk = !isAfloat(board);
+        if (isSinking) {
+            occupied.forEach(o -> {
+                board.getFields()[o.getRow()][o.getColumn()].setOccupied(false);
+                board.getFields()[o.getRow()][o.getColumn()].setHit(false);
+                board.getFields()[o.getRow()][o.getColumn()].setSunk(true);
+            });
+        }
+        return isSinking;
     }
 
     public final boolean isAfloat(final Board board) {
         return !occupied.stream().allMatch(
-                p -> board.getFields()[p.getRow()][p.getColumn()].isHit());
+                p -> board.getFields()[p.getRow()][p.getColumn()].isHit()
+                        || board.getFields()[p.getRow()][p.getColumn()]
+                                .isSunk());
     }
 
     public final boolean isHit(final Board board) {
@@ -78,8 +80,8 @@ public class Ship {
                 p -> board.getFields()[p.getRow()][p.getColumn()].isHit());
     }
 
-    private void rollback(final Board board,
-            final List<Position> occupied, final List<Position> zone) {
+    private void rollback(final Board board, final List<Position> occupied,
+            final List<Position> zone) {
         occupied.forEach(
                 p -> board.getFields()[p.getRow()][p.getColumn()] = Field
                         .builder().occupied(false).build());
