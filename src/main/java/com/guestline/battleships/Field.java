@@ -50,32 +50,11 @@ public class Field {
     }
 
     public final String toString(final boolean debug) {
-        if (occupied) {
-            if (hit) {
-                return HIT;
-            } else {
-                if (debug) {
-                    return OCCUPIED;
-                } else {
-                    return EMPTY;
-                }
-            }
-        } else {
-            if (missed) {
-                return MISSED;
-            } else if (sunk) {
-                return SUNK;
-            } else {
-                if (debug) {
-                    if (id != 0) {
-                        return String.valueOf(id);
-                    }
-                } else {
-                    return EMPTY;
-                }
-            }
-        }
-        return EMPTY;
+        return occupied ? (hit ? HIT : (debug ? OCCUPIED : EMPTY))
+                : (missed ? MISSED
+                        : (sunk ? SUNK
+                                : (debug ? (id != 0 ? String.valueOf(id)
+                                        : EMPTY) : EMPTY)));
     }
 
 }
