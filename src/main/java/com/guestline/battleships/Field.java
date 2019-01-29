@@ -12,7 +12,7 @@ public class Field {
     protected static final String MISSED = "+";
 
     protected static final String EMPTY = ".";
-    
+
     protected static final String SUNK = "#";
 
     protected static final String HIT = "#";
@@ -28,7 +28,7 @@ public class Field {
     @Getter
     @Setter
     private boolean sunk;
-    
+
     @Getter
     @Setter
     private boolean hit;

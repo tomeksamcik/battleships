@@ -17,6 +17,8 @@ public class Board {
 
     public static final int COLUMNS = 10;
 
+    private static final int ASCII_A = 97;
+
     private static final int GET_POSITION_ATTEMPTS_THRESHOLD = 10;
 
     @Getter(AccessLevel.PROTECTED)
@@ -44,9 +46,9 @@ public class Board {
             if (i == -1) {
                 sb.append("  ");
                 IntStream.range(0, fields.length)
-                        .forEach(j -> sb.append((char) (j + 97) + " "));
+                        .forEach(j -> sb.append((char) (j + ASCII_A) + " "));
             } else {
-                sb.append((i + 1) + (i != 9 ? " " : ""));
+                sb.append((i + 1) + (i != fields.length - 1 ? " " : ""));
                 IntStream.range(0, fields[i].length).forEach(j -> {
                     sb.append(fields[i][j].toString(debug) + " ");
                 });
@@ -81,7 +83,8 @@ public class Board {
         return zone;
     }
 
-    public final Optional<Position> getRandomPosition(final int id, final int size) {
+    public final Optional<Position> getRandomPosition(final int id,
+            final int size) {
         int row, column, attempts = 0;
         do {
             row = rand.nextInt(ROWS);

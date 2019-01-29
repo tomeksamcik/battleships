@@ -27,7 +27,8 @@ public class Position {
     }
 
     public final String toOrdinalString() throws UnsupportedEncodingException {
-        return new String(new byte[] {(byte) (column + 97) }, StandardCharsets.UTF_8.name()) + (row + 1);
+        return new String(new byte[] { (byte) (column + 97) },
+                StandardCharsets.UTF_8.name()) + (row + 1);
     }
 
     public final List<Position> getNeighbours() {

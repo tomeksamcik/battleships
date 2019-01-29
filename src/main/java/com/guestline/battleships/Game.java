@@ -17,7 +17,7 @@ public class Game {
 
     private final UserInput userInput;
 
-    private Game(final Board board, final UserInput userInput) {
+    Game(final Board board, final UserInput userInput) {
         this.board = board;
         this.userInput = userInput;
     }
@@ -55,8 +55,8 @@ public class Game {
     }
 
     public static void main(final String... args) {
-        Game game = new Game(new Board(),
-                new UserInput(new Scanner(System.in, StandardCharsets.UTF_8.name())));
+        Game game = new Game(new Board(), new UserInput(
+                new Scanner(System.in, StandardCharsets.UTF_8.name())));
         game.addShip(new Ship(1, 5, "Battleship"));
         game.addShip(new Ship(2, 4, "Destroyer"));
         game.addShip(new Ship(3, 4, "Destroyer"));
