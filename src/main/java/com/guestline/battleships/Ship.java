@@ -64,11 +64,11 @@ public class Ship {
     }
 
     private void rollback(final Board board,
-            final List<Position> occupied, final List<Position> zoned) {
+            final List<Position> occupied, final List<Position> zone) {
         occupied.forEach(
                 p -> board.getFields()[p.getRow()][p.getColumn()] = Field
                         .builder().occupied(false).build());
-        zoned.forEach(p -> board.getFields()[p.getRow()][p.getColumn()] = Field
+        zone.forEach(p -> board.getFields()[p.getRow()][p.getColumn()] = Field
                 .builder().occupied(false).build());
     }
 
