@@ -30,7 +30,7 @@ public class BoardTest {
     @Test
     public void testHitOrMiss() {
         Board board = new Board();
-        board.getFields()[0][0] = Field.builder().occupied(true).id(1).build();
+        board.getFields()[0][0] = Field.builder().occupied(true).zoneId(1).build();
 
         Field hit = board.hitOrMiss(new Position(0, 0));
         Field miss = board.hitOrMiss(new Position(1, 1));
@@ -63,7 +63,7 @@ public class BoardTest {
         Board board = new Board();
         IntStream.range(0, 10).forEach(i -> {
             IntStream.range(0, 10).forEach(j -> {
-                board.getFields()[i][j] = Field.builder().id(2).build();
+                board.getFields()[i][j] = Field.builder().zoneId(2).build();
             });
         });
 
@@ -77,7 +77,7 @@ public class BoardTest {
         Board board = new Board();
         IntStream.range(0, 10).forEach(i -> {
             IntStream.range(0, 10).forEach(j -> {
-                board.getFields()[i][j] = Field.builder().id(1).build();
+                board.getFields()[i][j] = Field.builder().zoneId(1).build();
             });
         });
 
@@ -91,7 +91,7 @@ public class BoardTest {
         Board board = new Board();
         IntStream.range(0, 5).forEach(i -> {
             IntStream.range(0, 10).forEach(j -> {
-                board.getFields()[i][j] = Field.builder().id(1).build();
+                board.getFields()[i][j] = Field.builder().zoneId(1).build();
             });
         });
 
@@ -109,7 +109,7 @@ public class BoardTest {
 
     private List<Position> getZone(Board board, int id, Position position) {
         board.getFields()[position.getRow()][position.getColumn()] = Field
-                .builder().occupied(true).id(id).build();
+                .builder().occupied(true).zoneId(id).build();
         return board.markZone(id, position);
     }
 
@@ -126,7 +126,7 @@ public class BoardTest {
         Board board = new Board();
         IntStream.range(0, 5).forEach(i -> {
             IntStream.range(0, 10).forEach(j -> {
-                board.getFields()[i][j] = Field.builder().id(1).build();
+                board.getFields()[i][j] = Field.builder().zoneId(1).build();
             });
         });
 

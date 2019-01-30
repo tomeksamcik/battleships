@@ -68,7 +68,7 @@ public class Board {
 
     public final Position markOccupied(final int id, final Position position) {
         fields[position.getRow()][position.getColumn()] = Field.builder()
-                .occupied(true).id(id).build();
+                .occupied(true).zoneId(id).build();
         return position;
     }
 
@@ -76,10 +76,10 @@ public class Board {
             final Position position) {
         List<Position> zone = position.getNeighbours().stream()
                 .filter(p -> !fields[p.getRow()][p.getColumn()].isOccupied())
-                .filter(p -> fields[p.getRow()][p.getColumn()].getId() == 0)
+                .filter(p -> fields[p.getRow()][p.getColumn()].getZoneId() == 0)
                 .collect(Collectors.toList());
         zone.forEach(p -> fields[p.getRow()][p.getColumn()] = Field.builder()
-                .id(id).build());
+                .zoneId(id).build());
         return zone;
     }
 
@@ -114,8 +114,8 @@ public class Board {
 
     private boolean isValid(final int id, final Position p) {
         return !fields[p.getRow()][p.getColumn()].isOccupied()
-                && (fields[p.getRow()][p.getColumn()].getId() == 0
-                        || fields[p.getRow()][p.getColumn()].getId() == id);
+                && (fields[p.getRow()][p.getColumn()].getZoneId() == Field.NO_ZONE
+                        || fields[p.getRow()][p.getColumn()].getZoneId() == id);
     }
 
 }

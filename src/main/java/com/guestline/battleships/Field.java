@@ -6,6 +6,8 @@ import lombok.Setter;
 
 @Builder
 public final class Field {
+    
+    public static final int NO_ZONE = 0;
 
     protected static final String OCCUPIED = "O";
 
@@ -34,7 +36,7 @@ public final class Field {
     private boolean hit;
 
     @Getter
-    private int id;
+    private int zoneId;
 
     private Field(final boolean occupied, final boolean missed,
             final boolean sunk, final boolean hit, final int id) {
@@ -42,7 +44,7 @@ public final class Field {
         this.missed = missed;
         this.sunk = sunk;
         this.hit = hit;
-        this.id = id;
+        this.zoneId = id;
     }
 
     public String toString() {
@@ -53,7 +55,7 @@ public final class Field {
         return occupied ? (hit ? HIT : (debug ? OCCUPIED : EMPTY))
                 : (missed ? MISSED
                         : (sunk ? SUNK
-                                : (debug ? (id != 0 ? String.valueOf(id)
+                                : (debug ? (zoneId != 0 ? String.valueOf(zoneId)
                                         : EMPTY) : EMPTY)));
     }
 

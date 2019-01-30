@@ -23,15 +23,15 @@ public class FieldTest {
         return Arrays.asList(new Object[][] {
                 { Field.OCCUPIED, Field.builder().occupied(true).build() },
                 { Field.OCCUPIED,
-                        Field.builder().occupied(true).id(1).build() },
+                        Field.builder().occupied(true).zoneId(1).build() },
                 { Field.HIT,
-                        Field.builder().occupied(true).hit(true).id(1)
+                        Field.builder().occupied(true).hit(true).zoneId(1)
                                 .build() },
-                { Field.HIT, Field.builder().sunk(true).id(1).build() },
+                { Field.HIT, Field.builder().sunk(true).zoneId(1).build() },
                 { Field.MISSED,
-                        Field.builder().sunk(true).missed(true).id(1).build() },
-                { "1", Field.builder().id(1).build() },
-                { Field.MISSED, Field.builder().missed(true).id(1).build() },
+                        Field.builder().sunk(true).missed(true).zoneId(1).build() },
+                { "1", Field.builder().zoneId(1).build() },
+                { Field.MISSED, Field.builder().missed(true).zoneId(1).build() },
                 { Field.EMPTY, Field.builder().build() }, });
     }
 
