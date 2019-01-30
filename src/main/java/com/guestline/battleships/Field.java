@@ -7,8 +7,6 @@ import lombok.Setter;
 @Builder
 public final class Field {
     
-    public static final int NO_ZONE = 0;
-
     protected static final String OCCUPIED = "O";
 
     protected static final String MISSED = "+";
@@ -18,6 +16,8 @@ public final class Field {
     protected static final String SUNK = "#";
 
     protected static final String HIT = "#";
+
+    public static final int NO_ZONE = 0;
 
     @Getter
     @Setter
